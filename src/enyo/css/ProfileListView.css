@@ -1,0 +1,40 @@
+.info-button {
+    min-width: 0px;
+    margin-left: 8px;
+    margin-top: 8px;
+}
+.info-icon {
+    width: 42px;
+    height: 46px;
+    margin-top: 4px;
+    margin-bottom: 0px;
+    margin-left: 8px;
+    padding: 0;
+    background: url(../../images/info-icon-sprite.png) no-repeat top left;  
+}
+.info-icon.selected {background-position: center left;}
+.info-icon.disabled {background-position: bottom left;}
+
+/* "Add Profile" list hack - for some reasons the single class is not apended */
+.palm-list div:not(.palm-row) + .palm-row.last.selected {
+    -webkit-border-image: url(../images/selection-gradient-single.png) 24 20 24 20 repeat repeat;
+}
+
+.box-center {
+    max-width:500px;
+    margin:22px auto 0;
+}
+
+.checkmark {
+    display: none;
+}
+
+.checkmark.true {                                                                     
+    display: block;
+    padding-top: 4px;
+}
+
+/*Pre3 fix [hack]*/
+.enyo-preference-button{
+    max-width: 40%;
+}

@@ -1,0 +1,2 @@
+Build Process
+To create the ipk for installation on a device you *must* package the sourcein such a way as to include the pmPreRemove.script and pmPostInstall.script scripts. These install the node service needed to mount network shares and other cifs related functionality. The easy way is to use Jason Robitaille's "IPK Packager" Java  applet.download it (http://forums.webosnation.com/canuck-coding/237326-ipk-packager.html), run it and point it (the Folder input at the top of the applet) to the src folder. It will pickup everything else it needs automatically from there.

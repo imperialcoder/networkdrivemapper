@@ -1,0 +1,3 @@
+[D-BUS Service]
+Name=com.nelsun.networkdrives.node
+Exec=/var/usr/bin/run-homebrew-js-service /media/cryptofs/apps/usr/palm/services/com.nelsun.networkdrives.node

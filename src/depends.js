@@ -1,0 +1,16 @@
+enyo.depends(
+    "enyo/DbApi.js",
+    "enyo/DBServiceWrapper.js",
+    "enyo/Util.js",
+    "enyo/AppView.js",
+    "enyo/css/AppView.css",
+    "enyo/NoFocusButton.js",
+    "enyo/AcceptCancelPopup.js",
+    "enyo/ErrorDialog.js",
+    "enyo/PasswordDialog.js",
+    "enyo/ProfileDialog.js",
+    "enyo/Profile.js",
+    "enyo/ProfileListItem.js",
+    "enyo/ProfileListView.js",
+    "enyo/css/ProfileListView.css"
+);

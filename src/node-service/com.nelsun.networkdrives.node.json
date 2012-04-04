@@ -1,0 +1,14 @@
+{
+  "role": {
+     "exeName":"js",
+     "type": "privileged",
+     "allowedNames": ["com.nelsun.networkdrives.node"]
+  },
+  "permissions": [
+    {
+      "service":"com.nelsun.networkdrives.node",
+      "inbound":["*"],
+      "outbound":["*"]
+    }
+  ]
+}

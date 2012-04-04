@@ -1,0 +1,17 @@
+#!/bin/sh
+
+
+APPID=com.nelsun.networkdrives
+NSRVID=com.nelsun.networkdrives.node
+
+APPS=/media/cryptofs/apps
+
+[ -d ${APPS} ] || { echo "Requires webOS 1.3.5 or later" ; exit 1 ; }
+
+# Stop the node service if running
+/usr/bin/luna-send -n 1 palm://${NSRVID}/__quit '{}'
+
+# Remove the node service executable
+rm -f /var/usr/sbin/${NSRVID}
+
+exit 0

@@ -1,0 +1,51 @@
+#!/bin/sh
+
+APPID=com.nelsun.networkdrives
+NSRVID=com.nelsun.networkdrives.node
+
+APPS=/media/cryptofs/apps
+
+[ -d ${APPS} ] || { echo "Requires webOS 1.3.5 or later" ; exit 1 ; }
+
+APPDIR=${APPS}/usr/palm/applications/${APPID}
+NSRVDIR=${APPS}/usr/palm/services/${NSRVID}
+
+mkdir ${NSRVDIR}
+
+# Remove the node service executable
+rm -f /var/usr/sbin/${NSRVID}
+
+# Remove the node dbus service
+rm -f /var/palm/ls2/services/prv/${NSRVID}.service
+rm -f /var/palm/ls2/services/pub/${NSRVID}.service
+
+# Remove the node ls2 roles
+rm -f /var/palm/ls2/roles/prv/${NSRVID}.json
+rm -f /var/palm/ls2/roles/pub/${NSRVID}.json
+/usr/bin/ls-control scan-services || true
+
+# Stop the node service if running
+/usr/bin/luna-send -n 1 palm://${NSRVID}/__quit '{}'
+
+# Copy over service files
+#cp ${NSRVDIR}/${NSRVID}.service /var/palm/ls2/services/prv/${NSRVID}.service
+rm -r ${NSRVDIR}
+cp -R ${APPDIR}/node-service ${NSRVDIR}
+
+# Install the node service executable
+mkdir -p /var/usr/sbin/
+sed -e "s|jail=on|jail=off|" -e "s|SERVICE_PATH=\$1|set ${NSRVDIR}\n\nSERVICE_PATH=\$1|" \
+    /usr/bin/run-js-service > /var/usr/sbin/${NSRVID}
+chmod ugo+x /var/usr/sbin/${NSRVID}
+
+# Override the node dbus service
+cp ${NSRVDIR}/${NSRVID}.service /var/palm/ls2/services/prv/${NSRVID}.service
+cp ${NSRVDIR}/${NSRVID}.service /var/palm/ls2/services/pub/${NSRVID}.service
+
+# Install the node ls2 roles
+mkdir -p /var/palm/ls2/roles/prv /var/palm/ls2/roles/pub
+cp ${NSRVDIR}/${NSRVID}.json /var/palm/ls2/roles/prv/${NSRVID}.json
+cp ${NSRVDIR}/${NSRVID}.json /var/palm/ls2/roles/pub/${NSRVID}.json
+/usr/bin/ls-control scan-services || true
+
+exit 0
